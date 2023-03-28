@@ -18,6 +18,8 @@ You will need to have Rust installed. You can get it by visiting https://rustup.
 
 ## MacOS/Linux
 
+[Test](exercises/strings/README.md)
+
 Just run:
 
 ```bash
