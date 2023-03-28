@@ -14,7 +14,6 @@
 
 // Execute `rustlings hint quiz3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 // https://www.reddit.com/r/learnrust/comments/wccx7s/rustlings_blocked_on_quiz3/
 
 pub struct ReportCard<T> {
