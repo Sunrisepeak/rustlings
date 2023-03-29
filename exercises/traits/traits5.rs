@@ -4,7 +4,6 @@
 // Don't change any line other than the marked one.
 // Execute `rustlings hint traits5` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
 pub trait SomeTrait {
     fn some_function(&self) -> bool {
