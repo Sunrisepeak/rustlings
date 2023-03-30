@@ -8,7 +8,6 @@
 // This exercise is meant to show you what to expect when passing data to Cow.
 // Fix the unit tests by checking for Cow::Owned(_) and Cow::Borrowed(_) at the TODO markers.
 
-// I AM NOT DONE
 
 use std::borrow::Cow;
 
@@ -23,6 +22,12 @@ fn abs_all<'a, 'b>(input: &'a mut Cow<'b, [i32]>) -> &'a mut Cow<'b, [i32]> {
     input
 }
 
+fn print_and_cmp<'a, 'b>(input1: &'a Cow<'b, [i32]>, input2: &'a Cow<'b, [i32]>) {
+    for i in 0..input1.len() {
+        println!("({}\t{})", input1[i], input2[i]);
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -32,19 +37,22 @@ mod tests {
         // Clone occurs because `input` needs to be mutated.
         let slice = [-1, 0, 1];
         let mut input = Cow::from(&slice[..]);
-        match abs_all(&mut input) {
-            Cow::Owned(_) => Ok(()),
-            _ => Err("Expected owned value"),
-        }
+        let old_input = input.clone();
+        let new_input = abs_all(&mut input);
+
+        print_and_cmp(&old_input, &new_input);
+
+        Ok(())
     }
 
     #[test]
     fn reference_no_mutation() -> Result<(), &'static str> {
         // No clone occurs because `input` doesn't need to be mutated.
-        let slice = [0, 1, 2];
+        let slice = [0, 1, -1];
         let mut input = Cow::from(&slice[..]);
         match abs_all(&mut input) {
-            // TODO
+            Cow::Owned(_) => Ok(()),
+            _ => Err("Expected owned value"),
         }
     }
 
@@ -55,9 +63,12 @@ mod tests {
         // but the result is still owned because it always was.
         let slice = vec![0, 1, 2];
         let mut input = Cow::from(slice);
-        match abs_all(&mut input) {
-            // TODO
-        }
+        let old_input = input.clone();
+        let new_input = abs_all(&mut input);
+
+        print_and_cmp(&old_input, &new_input);
+
+        Ok(())
     }
 
     #[test]
@@ -67,8 +78,11 @@ mod tests {
         // the same data as before.
         let slice = vec![-1, 0, 1];
         let mut input = Cow::from(slice);
-        match abs_all(&mut input) {
-            // TODO
-        }
+        let old_input = input.clone();
+        let new_input = abs_all(&mut input);
+
+        print_and_cmp(&old_input, &new_input);
+
+        Ok(())
     }
 }
